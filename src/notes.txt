@@ -1,0 +1,38 @@
+Number distribution
+-------------------
+2 ==> 1 pip
+3 3 ==> 2 pips each
+4 4 ==> 3 pips each
+5 5 ==> 4 pips each
+6 6 ==> 5 pips each
+8 8 ==> 5 pips each
+9 9 ==> 4 pips each
+10 10 ==> 3 pips each
+11 11 ==> 2 pips each
+12 ==> 1 pip
+
+In a balanced board, there seems to be a max of 12 pips per spot.
+6s and 8s are never next to each other.
+6s and 8s also never seem to be near the coast.
+
+Adjacency matrix thoughts
+-------------------------
+Seems like this would work best to identify a settlement?
+Could use spot with value of 0 to represent a non spot, 
+since matrix would be 5x5.
+
+Spots should have name according to number,
+what number they are (a for first spot, b for second spot, etc.)
+just doing number and resource is not defining enough 
+(there can be 2 wheat 6's on a board, for example)
+
+Example of correct ouput
+(1 represents desert)
+------------------------
+0a, 8a, 3a, 6a, 0b
+10a, 5a, 4a, 2a, 0c
+9a, 6b, 11a, 9b, 5b
+12a, 1a, 3b, 10b, 0d
+0e, 11b, 4b, 8b, 0f
+
+Using 6 pointers to keep track of neighbors seems insane, no?

@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700;800;900&display=swap');
+
+:root {
+  --color-ore: #7a8fa6;
+  --color-wheat: #e6b83a;
+  --color-sheep: #5cb85c;
+  --color-brick: #d9603b;
+  --color-wood: #4a7c4e;
+  --color-desert: #c9b97a;
+
+  --number-bg: #ffffff;
+  --number-text: #1a1a1a;
+  --number-red: #d63031;
+
+  --bg: #1e2a38;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: #f0f0f0;
+  font-family: 'Nunito', sans-serif;
+}
