@@ -8,13 +8,24 @@ type HexTileProps = {
 
 export const HexTile = ({ hex }: HexTileProps) => { 
   const drawHex = () => {
-    const hexCanvas = document.getElementById("hexCtx") as HTMLCanvasElement
+    const hexCanvas = document.getElementById(`hexCtx${hex.num}${hex.resource}`) as HTMLCanvasElement
     const ctx = hexCanvas.getContext("2d")!
     const w = hexCanvas.width;
     const h = hexCanvas.height;
 
     // Fill in appropriate color
-    ctx.fillStyle = "gray"
+    // TODO: color should change based on resource type
+    if (hex.resource === "Ore") {
+      ctx.fillStyle = "#b8ccd6"
+    } else if (hex.resource === "Brick") {
+      ctx.fillStyle = "#ff6b4a"
+    } else if (hex.resource === "Sheep") {
+      ctx.fillStyle = "#39ff7a"
+    } else if (hex.resource === "Wheat") {
+      ctx.fillStyle = "#ffd43b"
+    } else {
+      ctx.fillStyle = "#2ecc71"
+    }
 
     // Draw triangle
     ctx.beginPath();
@@ -57,15 +68,15 @@ export const HexTile = ({ hex }: HexTileProps) => {
   // }, [])
 
   useEffect(() => {
-    if (document.getElementById("hexNumber")) return
+    // if (document.getElementById("hexNumber")) return
 
-    const numberDiv = document.createElement("div")
-    numberDiv.id = "hexNumber"
-    numberDiv.className = `hexNumber${[6, 8].includes(hex.num) ? ' hot' : ''}`
-    numberDiv.textContent = hex.num.toString()
+    // const numberDiv = document.createElement("div")
+    // numberDiv.id = "hexNumber"
+    // numberDiv.className = `hexNumber${[6, 8].includes(hex.num) ? ' hot' : ''}`
+    // numberDiv.textContent = hex.num.toString()
 
-    const hexContainer = document.getElementById("hexContainer")
-    hexContainer?.appendChild(numberDiv)
+    // const hexContainer = document.getElementById("hexContainer")
+    // hexContainer?.appendChild(numberDiv)
   }, [])
 
   return (
@@ -73,8 +84,8 @@ export const HexTile = ({ hex }: HexTileProps) => {
       {/* Testing out prop */}
       {/* <div>{hex.num}</div> */}
 
-      <div id="hexContainer" style={{display: "flex", alignItems: "center"}}>
-        <canvas id="hexCtx" width="150" height="150" style={{zIndex: 1}}></canvas>
+      <div className="hex-container" style={{display: "flex", alignItems: "center"}}>
+        <canvas className="hex-context" id={`hexCtx${hex.num}${hex.resource}`} width="150" height="150" style={{zIndex: 1, padding: 0, marginRight: -47.5}}></canvas>
       </div>
     </>
   )
