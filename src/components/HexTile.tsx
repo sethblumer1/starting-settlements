@@ -9,7 +9,7 @@ type HexTileProps = {
 export const HexTile = ({ hex }: HexTileProps) => { 
   // To save specific tile to add number elem; 
   // necessary because we are using the absolute positioning
-  // const tileRef = useRef(null)
+  const tileContainerRef = useRef(null); const tileRef = useRef(null)
 
   // Id for hex canvas
   const hexCtxId: string = `hexCtx${hex.num}${hex.resource}`
@@ -43,6 +43,34 @@ export const HexTile = ({ hex }: HexTileProps) => {
 
   useEffect(() => {
     drawHex()
+
+    if (tileContainerRef.current && tileRef.current) {
+      const tileElem = tileRef.current as HTMLElement
+      const dimensions = tileElem.getBoundingClientRect()
+
+      const numberDiv = document.createElement("div")
+
+      numberDiv.className = "hex-number"
+      numberDiv.textContent = hex.num.toString()
+
+      // Todo: better way to do this?
+      if (hex.num === 8 || hex.num === 6) {
+        numberDiv.style.color = "#c0392b"
+      }
+
+      const tileContainerElem = tileContainerRef.current as HTMLElement
+      tileContainerElem?.appendChild(numberDiv)
+
+      // Old way; not sure why we ever used dimensions
+      // numberDiv.style.position = "absolute" 
+      // numberDiv.style.left = "65%"
+      // numberDiv.style.top = "35%"
+      // numberDiv.textContent = hex.num.toString()
+      // numberDiv.style.zIndex = "9999"
+
+      // const tileContainerElem = tileContainerRef.current as HTMLElement
+      // tileContainerElem?.appendChild(numberDiv)
+    }
   }, [])
 
   // useEffect(() => {
@@ -80,8 +108,8 @@ export const HexTile = ({ hex }: HexTileProps) => {
       {/* Testing out prop */}
       {/* <div>{hex.num}</div> */}
 
-      <div className="hex-container" style={{display: "flex", alignItems: "center"}}>
-        <canvas className="hex-context" id={hexCtxId} width="150" height="150" style={{zIndex: 1, padding: 0, marginRight: -47.5}}></canvas>
+      <div className="hex-container" ref={tileContainerRef} style={{display: "flex", alignItems: "center"}}>
+        <canvas className="hex-context" id={hexCtxId} ref={tileRef} width="150" height="150" style={{zIndex: 1, padding: 0, marginRight: -47.5}}></canvas>
       </div>
     </>
   )
