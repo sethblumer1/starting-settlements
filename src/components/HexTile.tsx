@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { Hex } from "../models/Hex"
 import "../styles/hex-tile.css"
 
@@ -7,25 +7,21 @@ type HexTileProps = {
 }
 
 export const HexTile = ({ hex }: HexTileProps) => { 
+  // To save specific tile to add number elem; 
+  // necessary because we are using the absolute positioning
+  // const tileRef = useRef(null)
+
+  // Id for hex canvas
+  const hexCtxId: string = `hexCtx${hex.num}${hex.resource}`
+
   const drawHex = () => {
-    const hexCanvas = document.getElementById(`hexCtx${hex.num}${hex.resource}`) as HTMLCanvasElement
+    const hexCanvas = document.getElementById(hexCtxId) as HTMLCanvasElement
     const ctx = hexCanvas.getContext("2d")!
     const w = hexCanvas.width;
     const h = hexCanvas.height;
 
-    // Fill in appropriate color
-    // TODO: color should change based on resource type
-    if (hex.resource === "Ore") {
-      ctx.fillStyle = "#b8ccd6"
-    } else if (hex.resource === "Brick") {
-      ctx.fillStyle = "#ff6b4a"
-    } else if (hex.resource === "Sheep") {
-      ctx.fillStyle = "#39ff7a"
-    } else if (hex.resource === "Wheat") {
-      ctx.fillStyle = "#ffd43b"
-    } else {
-      ctx.fillStyle = "#2ecc71"
-    }
+    // set background color
+    ctx.fillStyle = hex.color as string;
 
     // Draw triangle
     ctx.beginPath();
@@ -51,33 +47,33 @@ export const HexTile = ({ hex }: HexTileProps) => {
 
   // useEffect(() => {
   //   // get dimensions and put number in middle of hex
-  //   const dimensions = document.getElementById("hexCtx")?.getBoundingClientRect()
-  //   console.log(dimensions)
+    // const dimensions = document.getElementById(hexCtxId)?.getBoundingClientRect()
+    // console.log(dimensions)
 
-  //   const numberDiv = document.createElement("div")
-  //   numberDiv.style.position = "absolute"
-  //   const midPoint = ((dimensions!.right - dimensions!.left) / 2) + dimensions!.left  
-  //   numberDiv.style.left = (midPoint - 5) + 'px'
-  //   numberDiv.style.top = dimensions!.top.toString() + 'px'
-  //   numberDiv.textContent = hex.num.toString()
-  //   numberDiv.style.zIndex = "9999"
+    // const numberDiv = document.createElement("div")
+    // numberDiv.style.position = "absolute"
+    // const midPoint = ((dimensions!.right - dimensions!.left) / 2) + dimensions!.left  
+    // numberDiv.style.left = (midPoint - 5) + 'px'
+    // numberDiv.style.top = dimensions!.top.toString() + 'px'
+    // numberDiv.textContent = hex.num.toString()
+    // numberDiv.style.zIndex = "9999"
 
-  //   const hexConatiner = document.getElementById("hexContainer")
-  //   hexConatiner?.appendChild(numberDiv)
+    // const hexConatiner = document.getElementById("hexContainer")
+    // hexConatiner?.appendChild(numberDiv)
 
   // }, [])
 
-  useEffect(() => {
-    // if (document.getElementById("hexNumber")) return
+  // useEffect(() => {
+  //   if (document.getElementById("hexNumber")) return
 
-    // const numberDiv = document.createElement("div")
-    // numberDiv.id = "hexNumber"
-    // numberDiv.className = `hexNumber${[6, 8].includes(hex.num) ? ' hot' : ''}`
-    // numberDiv.textContent = hex.num.toString()
+  //   const numberDiv = document.createElement("div")
+  //   numberDiv.id = "hexNumber"
+  //   numberDiv.className = `hexNumber${[6, 8].includes(hex.num) ? ' hot' : ''}`
+  //   numberDiv.textContent = hex.num.toString()
 
-    // const hexContainer = document.getElementById("hexContainer")
-    // hexContainer?.appendChild(numberDiv)
-  }, [])
+  //   const hexContainer = document.getElementById("hexContainer")
+  //   hexContainer?.appendChild(numberDiv)
+  // }, [])
 
   return (
     <>
@@ -85,7 +81,7 @@ export const HexTile = ({ hex }: HexTileProps) => {
       {/* <div>{hex.num}</div> */}
 
       <div className="hex-container" style={{display: "flex", alignItems: "center"}}>
-        <canvas className="hex-context" id={`hexCtx${hex.num}${hex.resource}`} width="150" height="150" style={{zIndex: 1, padding: 0, marginRight: -47.5}}></canvas>
+        <canvas className="hex-context" id={hexCtxId} width="150" height="150" style={{zIndex: 1, padding: 0, marginRight: -47.5}}></canvas>
       </div>
     </>
   )

@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700;800;900&display=swap');
 
 :root {
-  --color-ore: #7a8fa6;
-  --color-wheat: #e6b83a;
-  --color-sheep: #5cb85c;
-  --color-brick: #d9603b;
-  --color-wood: #4a7c4e;
-  --color-desert: #c9b97a;
+  --color-Ore: #b8ccd6;
+  --color-Wheat: #ffd43b;
+  --color-Sheep: #39ff7a;
+  --color-Brick: #ff6b4a;
+  --color-Wood: #2ecc71;
+  --color-Desert: #c9b97a;
 
   --number-bg: #ffffff;
   --number-text: #1a1a1a;
