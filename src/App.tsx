@@ -1,6 +1,5 @@
 import './App.css'
 import { Hex } from './models/Hex'
-import { HexTile } from './components/HexTile'
 import { HexRow } from './components/HexRow'
 import { Resource } from './types/Resource'
 
