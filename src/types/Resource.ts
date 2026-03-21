@@ -3,5 +3,6 @@ export enum Resource {
     Brick = "Brick",
     Sheep = "Sheep",
     Wheat = "Wheat",
-    Wood = "Wood"
+    Wood = "Wood",
+    Desert = "Desert"
 }
