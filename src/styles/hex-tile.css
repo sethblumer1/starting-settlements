@@ -5,6 +5,7 @@
   align-items: center;
   filter: drop-shadow(0 6px 24px rgba(0,0,0,0.5));
   transition: transform 0.2s ease, filter 0.2s ease;
+  min-width: none;
   /* cursor: pointer; */
 }
 

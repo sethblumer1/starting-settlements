@@ -1,9 +1,19 @@
 import { useEffect, useRef } from "react"
 import { Hex } from "../models/Hex"
 import "../styles/hex-tile.css"
+import { Resource } from "../types/Resource"
 
 type HexTileProps = {
   hex: Hex
+}
+
+// To ensure each has a unique ID
+function generateRandomString(length: number, charset: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'): string {
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += charset.charAt(Math.floor(Math.random() * charset.length));
+  }
+  return result;
 }
 
 export const HexTile = ({ hex }: HexTileProps) => { 
@@ -12,7 +22,7 @@ export const HexTile = ({ hex }: HexTileProps) => {
   const tileContainerRef = useRef(null); const tileRef = useRef(null)
 
   // Id for hex canvas
-  const hexCtxId: string = `hexCtx${hex.num}${hex.resource}`
+  const hexCtxId: string = `hexCtx${hex.num}${hex.resource}${generateRandomString(3)}`
 
   const drawHex = () => {
     const hexCanvas = document.getElementById(hexCtxId) as HTMLCanvasElement
@@ -44,7 +54,7 @@ export const HexTile = ({ hex }: HexTileProps) => {
   useEffect(() => {
     drawHex()
 
-    if (tileContainerRef.current && tileRef.current) {
+    if (tileContainerRef.current && tileRef.current && hex.resource != Resource.Desert) {
       const tileElem = tileRef.current as HTMLElement
       const dimensions = tileElem.getBoundingClientRect()
 
@@ -109,7 +119,7 @@ export const HexTile = ({ hex }: HexTileProps) => {
       {/* <div>{hex.num}</div> */}
 
       <div className="hex-container" ref={tileContainerRef} style={{display: "flex", alignItems: "center"}}>
-        <canvas className="hex-context" id={hexCtxId} ref={tileRef} width="150" height="150" style={{zIndex: 1, padding: 0, marginRight: -47.5}}></canvas>
+        <canvas className="hex-context" id={hexCtxId} ref={tileRef} width="150" height="150" style={{zIndex: 1, marginRight: -47.5}}></canvas>
       </div>
     </>
   )
