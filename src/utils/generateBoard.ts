@@ -40,4 +40,6 @@ for (let i = 0; i < shuffledHexes.length; i++) {
     }
 }
 
+console.log(board)
+
 export default board;

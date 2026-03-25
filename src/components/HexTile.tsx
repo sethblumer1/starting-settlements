@@ -35,7 +35,17 @@ export const HexTile = ({ hex }: HexTileProps) => {
 
     // Draw triangle
     ctx.beginPath();
+
+    // To save position of vertices, need base position + first point
+
+    // console.log("first triangle coords: ")
+    // console.log(w / 6, h / 4 + 1);
+
     ctx.moveTo(w / 6, h / 4 + 1);
+
+    // console.log("second triangle coords: ")
+    // console.log(w / 2, 0);
+
     ctx.lineTo(w / 2, 0);
     ctx.lineTo(w - h / 6, h / 4 + 1);
     ctx.fill();
@@ -48,6 +58,8 @@ export const HexTile = ({ hex }: HexTileProps) => {
     ctx.moveTo(w / 6, h / 4 + h / 3);
     ctx.lineTo(w / 2, h - h / 6);
     ctx.lineTo(w - w / 6, h / 4 + h / 3);
+
+    // console.log(ctx)
     ctx.fill();
   }
 
@@ -58,6 +70,79 @@ export const HexTile = ({ hex }: HexTileProps) => {
       const tileElem = tileRef.current as HTMLElement
       const dimensions = tileElem.getBoundingClientRect()
 
+      // testing element at top  corner
+      const top = document.createElement("div")
+      top.style.backgroundColor = "white"
+      top.style.width = "5px"
+      top.style.height = "5px"
+      top.style.borderRadius = "50%"
+
+      top.style.left = "71.5%"
+      top.style.top = "0%"
+      top.style.zIndex = "9999"
+      top.style.position = "absolute"
+      
+      // testing element at top left corner
+      const topLeft = document.createElement("div")
+      topLeft.style.backgroundColor = "white"
+      topLeft.style.width = "5px"
+      topLeft.style.height = "5px"
+      topLeft.style.borderRadius = "50%"
+
+      topLeft.style.left = "25%"
+      topLeft.style.top = "25%"
+      topLeft.style.zIndex = "9999"
+      topLeft.style.position = "absolute"
+
+      // testing element at top right corner
+      const topRight = document.createElement("div")
+      topRight.style.backgroundColor = "white"
+      topRight.style.width = "5px"
+      topRight.style.height = "5px"
+      topRight.style.borderRadius = "50%"
+
+      topRight.style.left = "120%"
+      topRight.style.top = "25%"
+      topRight.style.zIndex = "9999"
+      topRight.style.position = "absolute"
+
+      // testing element at bottom left corner
+      const bottomLeft = document.createElement("div")
+      bottomLeft.style.backgroundColor = "white"
+      bottomLeft.style.width = "5px"
+      bottomLeft.style.height = "5px"
+      bottomLeft.style.borderRadius = "50%"
+
+      bottomLeft.style.left = "25%"
+      bottomLeft.style.top = "58%"
+      bottomLeft.style.zIndex = "9999"
+      bottomLeft.style.position = "absolute"
+
+      // testing element at bottom right corner
+      const bottomRight = document.createElement("div")
+      bottomRight.style.backgroundColor = "white"
+      bottomRight.style.width = "5px"
+      bottomRight.style.height = "5px"
+      bottomRight.style.borderRadius = "50%"
+
+      bottomRight.style.left = "120%"
+      bottomRight.style.top = "58%"
+      bottomRight.style.zIndex = "9999"
+      bottomRight.style.position = "absolute"
+
+      // testing element at bottom corner
+      const bottom = document.createElement("div")
+      bottom.style.backgroundColor = "white"
+      bottom.style.width = "5px"
+      bottom.style.height = "5px"
+      bottom.style.borderRadius = "50%"
+
+      bottom.style.left = "71.5%"
+      bottom.style.top = "80%"
+      bottom.style.zIndex = "9999"
+      bottom.style.position = "absolute"
+
+      // div for number
       const numberDiv = document.createElement("div")
 
       numberDiv.className = "hex-number"
@@ -71,15 +156,13 @@ export const HexTile = ({ hex }: HexTileProps) => {
       const tileContainerElem = tileContainerRef.current as HTMLElement
       tileContainerElem?.appendChild(numberDiv)
 
-      // Old way; not sure why we ever used dimensions
-      // numberDiv.style.position = "absolute" 
-      // numberDiv.style.left = "65%"
-      // numberDiv.style.top = "35%"
-      // numberDiv.textContent = hex.num.toString()
-      // numberDiv.style.zIndex = "9999"
-
-      // const tileContainerElem = tileContainerRef.current as HTMLElement
-      // tileContainerElem?.appendChild(numberDiv)
+      // Dots to represent vertices
+      tileContainerElem?.appendChild(top)
+      tileContainerElem?.appendChild(topLeft)
+      tileContainerElem?.appendChild(topRight)
+      tileContainerElem?.appendChild(bottomLeft)
+      tileContainerElem?.appendChild(bottomRight)
+      tileContainerElem?.appendChild(bottom)
     }
   }, [])
 
@@ -115,11 +198,8 @@ export const HexTile = ({ hex }: HexTileProps) => {
 
   return (
     <>
-      {/* Testing out prop */}
-      {/* <div>{hex.num}</div> */}
-
       <div className="hex-container" ref={tileContainerRef} style={{display: "flex", alignItems: "center"}}>
-        <canvas className="hex-context" id={hexCtxId} ref={tileRef} width="150" height="150" style={{zIndex: 1, marginRight: -47.5}}></canvas>
+        <canvas className="hex-context" id={hexCtxId} ref={tileRef} width="150" height="150" style={{zIndex: 1, marginRight: -48.5}}></canvas>
       </div>
     </>
   )
